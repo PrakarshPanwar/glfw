@@ -53,11 +53,11 @@
 #include "fractional-scale-v1-client-protocol.h"
 #include "cursor-shape-v1-client-protocol.h"
 
-// Dummy Tablet Tool Interface struct
-struct wl_interface zwp_tablet_tool_v2_interface = {};
-
 #define GLFW_BORDER_SIZE    4
 #define GLFW_CAPTION_HEIGHT 24
+
+// Dummy Tablet Tool Interface struct
+struct wl_interface zwp_tablet_tool_v2_interface = {};
 
 static int createTmpfileCloexec(char* tmpname)
 {
