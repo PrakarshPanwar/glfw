@@ -56,9 +56,6 @@
 #define GLFW_BORDER_SIZE    4
 #define GLFW_CAPTION_HEIGHT 24
 
-// Dummy Tablet Tool Interface struct
-struct wl_interface zwp_tablet_tool_v2_interface = {};
-
 static int createTmpfileCloexec(char* tmpname)
 {
     int fd;
@@ -3020,6 +3017,9 @@ static void relativePointerHandleRelativeMotion(void* userData,
 
     _glfwInputCursorPos(window, xpos, ypos);
 }
+
+// Dummy Tablet Tool Interface struct
+const struct wl_interface zwp_tablet_tool_v2_interface = {};
 
 static const struct zwp_relative_pointer_v1_listener relativePointerListener =
 {
