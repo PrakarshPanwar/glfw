@@ -909,7 +909,7 @@ int _glfwInitWayland(void)
         return GLFW_FALSE;
     }
 
-    if (!loadCursorTheme())
+    if (!(_glfw.wl.cursorShapeDevice || loadCursorTheme()))
         return GLFW_FALSE;
 
     if (_glfw.wl.seat && _glfw.wl.dataDeviceManager)

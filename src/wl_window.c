@@ -3106,6 +3106,12 @@ GLFWbool _glfwCreateCursorWayland(_GLFWcursor* cursor,
 
 GLFWbool _glfwCreateStandardCursorWayland(_GLFWcursor* cursor, int shape)
 {
+    if (!_glfw.wl.cursorTheme)
+    {
+        cursor->wl.shape = shape;
+        return GLFW_TRUE;
+    }
+
     const char* name = NULL;
     cursor->wl.shape = shape;
 
