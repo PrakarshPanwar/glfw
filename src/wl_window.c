@@ -3399,20 +3399,18 @@ void _glfwSetCursorWayland(_GLFWwindow* window, _GLFWcursor* cursor)
             setCursorImage(window, &cursor->wl);
         else
         {
-            struct wl_cursor* defaultCursor =
-                wl_cursor_theme_get_cursor(_glfw.wl.cursorTheme, "left_ptr");
-            if (!defaultCursor)
+            struct wl_cursor* defaultCursor = _glfw.wl.cursorTheme ?
+                wl_cursor_theme_get_cursor(_glfw.wl.cursorTheme, "left_ptr") : NULL;
+
+            struct wl_cursor* defaultCursorHiDPI = _glfw.wl.cursorThemeHiDPI ?
+                wl_cursor_theme_get_cursor(_glfw.wl.cursorThemeHiDPI, "left_ptr") : NULL;
+
+            // If protocol is unsupported and no themes are loaded
+            if (!(defaultCursor || defaultCursorHiDPI || _glfw.wl.cursorShapeDevice))
             {
                 _glfwInputError(GLFW_PLATFORM_ERROR,
                                 "Wayland: Standard cursor not found");
                 return;
-            }
-
-            struct wl_cursor* defaultCursorHiDPI = NULL;
-            if (_glfw.wl.cursorThemeHiDPI)
-            {
-                defaultCursorHiDPI =
-                    wl_cursor_theme_get_cursor(_glfw.wl.cursorThemeHiDPI, "left_ptr");
             }
 
             _GLFWcursorWayland cursorWayland =
